@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Just for You 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Arial", sans-serif;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 40px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        animation: pop 0.8s ease;
+        width: 340px;
+    }
+
+    h1 {
+        color: #ff4d6d;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #555;
+    }
+
+    button {
+        margin: 15px;
+        padding: 12px 28px;
+        font-size: 16px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .yes {
+        background: #ff4d6d;
+        color: white;
+    }
+
+    .yes:hover {
+        transform: scale(1.15);
+    }
+
+    .no {
+        background: #f0f0f0;
+        position: absolute;
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 26px;
+        animation: float 4s linear forwards;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+
+    @keyframes float {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(-900px); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Hey Beautiful 💕</h1>
+    <p>
+        I have a tiny question for you 🥰<br>
+        <strong>Will you be my Valentine?</strong>
+    </p>
+
+    <button class="yes" onclick="yesClicked()">Yes 💖</button>
+    <button class="no" onmouseover="moveNo()">Hmm… 🤭</button>
+
+    <p id="tease" style="color:#ff4d6d;font-size:14px;"></p>
+</div>
+
+<script>
+let teaseCount = 0;
+
+function moveNo() {
+    const btn = document.querySelector('.no');
+    const tease = document.getElementById('tease');
+
+    teaseCount++;
+
+    const messages = [
+        "Hehe 😄",
+        "You’re adorable when you hesitate 🤭",
+        "Okay but that smile says yes 😌",
+        "Stop being cute 😳",
+        "I know you’re smiling right now 💕"
+    ];
+
+    tease.innerText = messages[Math.min(teaseCount - 1, messages.length - 1)];
+
+    btn.style.left = Math.random() * window.innerWidth + 'px';
+    btn.style.top = Math.random() * window.innerHeight + 'px';
+}
+
+function yesClicked() {
+    document.body.innerHTML = `
+        <div style="
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            background:linear-gradient(135deg,#ff758c,#ff7eb3);
+            text-align:center;
+            padding:20px;
+        ">
+            <h1 style="color:white;font-size:46px;">
+                Yayyy!!! 💕🌹
+            </h1>
+
+            <p style="color:white;font-size:22px;">
+                You just made my heart very happy 🥰
+            </p>
+
+            <img
+                src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"
+                alt="Cat holding roses"
+                style="width:300px;border-radius:20px;
+                box-shadow:0 12px 35px rgba(0,0,0,0.35);"
+            >
+
+            <p style="color:white;font-size:22px;margin-top:20px;">
+                Happy Valentine’s Day 💐<br>
+                I can’t wait to make more memories with you ❤️
+            </p>
+        </div>
+    `;
+
+    setInterval(createHeart, 250);
+}
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.bottom = '0px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+}
+</script>
+
+</body>
+</html>
